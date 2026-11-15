@@ -1,11 +1,12 @@
+
 import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 import { IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { carosel } from '../Data/Carosel';
 import { CiMenuFries } from 'react-icons/ci';
-import logo from '../Images/whiteLogo.jpg'
-import { coursesItem } from '../Data/coursesItem';
+import logo from '../Images/whiteLogo.jpg';
+import { coursesItem } from '../Data/CoursesItem';
 
 const Navbar = () => {
     const [changeIcon, setChangeIcon] = useState(true);
@@ -13,32 +14,30 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
 
     const callMenu = () => {
-        document.getElementsByClassName('menu')[0].classList.toggle('coming-menu')
-    }
-
-    // Alt menyunun ikonunu dəyişmək funksiyası ucun istifade edilen kod
+        document.getElementsByClassName('menu')[0]?.classList.toggle('coming-menu');
+    };
 
     const navigate1 = useNavigate();
     const navigate2 = useNavigate();
 
     const mainPage = (itemName) => {
-        const url = itemName.split(" ").join("-").toLowerCase()
+        const url = itemName.split(" ").join("-").toLowerCase();
         navigate1(`/sale/${url}`);
         setChangeIcon(!changeIcon);
-    }
+    };
 
     const goCourseType = (courseUrl) => {
-        const url = courseUrl.split(" ").join("-").toLowerCase()
-        navigate2(`/type/${url}`)
+        const url = courseUrl.split(" ").join("-").toLowerCase();
+        navigate2(`/type/${url}`);
         setChangeIconCourse(!changeIconCourse);
-        window.location.reload()
-    }
+        window.location.reload();
+    };
 
     const downMenu = () => {
         setChangeIcon(!false);
         setChangeIconCourse(true);
-        alert("üzərində iş gedir")
-        callMenu()
+        alert("üzərində iş gedir");
+        callMenu();
     };
 
     const downMenuCourse = () => {
@@ -46,7 +45,6 @@ const Navbar = () => {
         setChangeIcon(true);
     };
 
-    // Scroll hadisəsini izləyən funksiya
     const scrollEvent = () => {
         setScrolled(window.scrollY > 100);
     };
@@ -69,6 +67,7 @@ const Navbar = () => {
                         Ana Səhifə
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink className="menu-elements" onClick={downMenuCourse}>
                         Təhsil
@@ -81,17 +80,20 @@ const Navbar = () => {
 
                     {!changeIconCourse && (
                         <ul className="submenu">
-                            {
-                                coursesItem.map((e) => {
-                                    // klik zamanı iki funksiya çağrılıb
-                                    return <li key={e.id}>
-                                        <button onClick={() => { goCourseType(e.nameOfItem), callMenu() }}>{e.nameOfItem}</button>
-                                    </li>
-                                })
-                            }
+                            {coursesItem.map((e) => (
+                                <li key={e.id}>
+                                    <button onClick={() => {
+                                        goCourseType(e.nameOfItem);
+                                        callMenu();
+                                    }}>
+                                        {e.nameOfItem}
+                                    </button>
+                                </li>
+                            ))}
                         </ul>
                     )}
                 </li>
+
                 <li>
                     <NavLink className="menu-elements" onClick={downMenu}>
                         Satış
@@ -104,13 +106,16 @@ const Navbar = () => {
 
                     {!changeIcon && (
                         <ul className="submenu">
-                            {
-                                carosel.map((e) => {
-                                    return <li key={e.id}>
-                                        <button onClick={() => { mainPage(e.nameCarosel), callMenu() }}>{e.nameCarosel}</button>
-                                    </li>
-                                })
-                            }
+                            {carosel.map((e) => (
+                                <li key={e.id}>
+                                    <button onClick={() => {
+                                        mainPage(e.nameCarosel);
+                                        callMenu();
+                                    }}>
+                                        {e.nameCarosel}
+                                    </button>
+                                </li>
+                            ))}
                         </ul>
                     )}
                 </li>
@@ -120,11 +125,13 @@ const Navbar = () => {
                         İnklüziv Sənətkarlıq
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink to={'/azerbaijan-art'} className="menu-elements" onClick={callMenu}>
                         Azərbaycan Sənətkarlığı
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink to={'/about-us'} className="menu-elements" onClick={callMenu}>
                         Haqqımızda
@@ -132,14 +139,12 @@ const Navbar = () => {
                 </li>
             </ul>
 
-            {
-                window.innerWidth <= 1000
-                    ? <CiMenuFries className='menu-icon'
-                        onClick={
-                            () => callMenu()
-                        } />
-                    : ''
-            }
+            {window.innerWidth <= 1000 && (
+                <CiMenuFries
+                    className="menu-icon"
+                    onClick={callMenu}
+                />
+            )}
         </header>
     );
 };
