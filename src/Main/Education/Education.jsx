@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { coursesItem } from '../../Data/coursesItem'
+import { coursesItem } from '../../Data/CoursesItem'
 import './Education.css'
 
 const Education = () => {
@@ -32,7 +33,7 @@ const Education = () => {
                 coursesItem.map((e) => {
                     if (e.nameOfItem.split(" ").join("-").toLowerCase() == courseUrl) {
                         return <div key={e.id} className='education-main-part'>
-                            <div className='education-defined' >
+                            <div className='education-defined'>
                                 {
                                     e.courses.map((f) => {
                                         return <button key={f.id} onClick={() => goProfession(f.id)}>
@@ -43,16 +44,12 @@ const Education = () => {
                             </div>
 
                             <h1 style={{ display: display }}>
-                                {
-                                    e.nameOfItem
-                                }
+                                {e.nameOfItem}
                             </h1>
                             <p style={{ display: display }}>
-                                {
-                                    e.textOfItem
-                                }
+                                {e.textOfItem}
                             </p>
-                            <div className='education-view' >
+                            <div className='education-view'>
                                 {
                                     e.courses.map((f) => {
                                         if (f.id === profession) {
@@ -84,9 +81,7 @@ const Education = () => {
                                                             {
                                                                 f.coursesWho.map((g) => {
                                                                     return <li key={f.id + g.id}>
-                                                                        <p>
-                                                                            {g.inform}
-                                                                        </p>
+                                                                        <p>{g.inform}</p>
                                                                     </li>
                                                                 })
                                                             }
@@ -107,9 +102,7 @@ const Education = () => {
                                                     </div>
                                                 </div>
 
-                                                <p>
-                                                    {f.lastPhrase}
-                                                </p>
+                                                <p>{f.lastPhrase}</p>
                                             </div>
                                         }
                                     })
@@ -119,9 +112,6 @@ const Education = () => {
                     }
                 })
             }
-
-
-
         </div>
     )
 }
