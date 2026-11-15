@@ -25,7 +25,7 @@ Artcenter.az is a web project developed with React, featuring modern design, smo
 
 👨‍💻 Developer
 
-Shukur Sukurov
+Shukur Shukurov
 
 Frontend Developer
 
